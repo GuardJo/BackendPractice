@@ -1,4 +1,4 @@
-package org.example.password.generator.calculator;
+package org.example.calculator;
 
 public class Calculator {
     public static int calculate(int operand1, String operator, int operand2) {
