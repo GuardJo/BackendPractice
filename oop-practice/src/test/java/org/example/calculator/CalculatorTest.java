@@ -35,14 +35,6 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(-1);
     }
 
-    @DisplayName("0으로 나눌 시 IllegalArgumentException 발생")
-    @Test
-    void testDivZero() {
-        assertThatCode(() -> Calculator.calculate(10, "/", 0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("operand is zero");
-    }
-
     @DisplayName("사칙 연산 정상 수행")
     @ParameterizedTest
     @MethodSource("getCalcTestParams")

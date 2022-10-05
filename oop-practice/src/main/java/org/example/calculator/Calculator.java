@@ -12,7 +12,7 @@ public class Calculator {
     public static int calculate(int operand1, String operator, int operand2) {
         return arithmeticOperators.stream()
                 .filter((arithmeticOperator) -> arithmeticOperator.isCurrectOperator(operator))
-                .map((arithmeticOperator) -> arithmeticOperator.calculate(operand1, operand2))
+                .map((arithmeticOperator) -> arithmeticOperator.calculate(new PositiveNumber(operand1), new PositiveNumber(operand2)))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Wrong Operator"));
     }
