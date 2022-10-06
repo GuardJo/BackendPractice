@@ -7,6 +7,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 요구사항
+ * 평균 학점 = (학점 수 * 교과목 평점) 합계 / 수강 신청 총 학점 수
+ * 일급 컬렉션 사용
+ */
 public class GradeCalculatorTest {
     // 학점 계산기 구조
     // 필요 도메인 : 이수 과목, 학점 계산기
