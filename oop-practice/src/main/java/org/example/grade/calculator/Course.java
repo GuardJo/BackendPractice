@@ -46,4 +46,8 @@ public class Course {
     public int getScore() {
         return this.score;
     }
+
+    public double getActualScore() {
+        return this.score * getNumberOfGrade();
+    }
 }

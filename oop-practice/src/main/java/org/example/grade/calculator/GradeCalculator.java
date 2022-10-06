@@ -15,7 +15,7 @@ public class GradeCalculator {
      */
     public double calculate() {
         double sumScore = courses.stream()
-                .mapToDouble(course -> course.getScore() * course.getNumberOfGrade())
+                .mapToDouble(course -> course.getActualScore())
                 .sum();
 
         int totalCourseScore = courses.stream()
