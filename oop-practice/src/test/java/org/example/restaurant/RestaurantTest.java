@@ -1,5 +1,12 @@
 package org.example.restaurant;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatCode;
+
 /**
  * 식당
  * 음식 주문 과정 테스트
@@ -19,4 +26,24 @@ package org.example.restaurant;
  * 6. 구현
  */
 public class RestaurantTest {
+    @DisplayName("식당에 방문한 손님 생성 테스트")
+    @Test
+    public void testCreateCustomer() {
+        assertThatCode(() -> new Customer("아무개"))
+                .doesNotThrowAnyException();
+    }
+
+    @DisplayName("메뉴항목에 존재하는 메뉴 주문 테스트")
+    @Test
+    public void testOrder() {
+        List<MenuItem> menuItems = List.of(
+                new MenuItem("탕수육", 20000),
+                new MenuItem("짜장면", 8000)
+        );
+        MenuList menuList = new MenuList(menuItems);
+        Customer customer = new Customer("아무개");
+
+        assertThatCode(() -> customer.order("탕수육", menuList, new Chief()))
+                .doesNotThrowAnyException();
+    }
 }
