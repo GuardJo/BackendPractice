@@ -2,6 +2,9 @@ package org.example.restaurant;
 
 import java.util.Objects;
 
+/**
+ * 식당 요리
+ */
 public class Food {
     private String name;
     private int price;
