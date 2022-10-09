@@ -32,6 +32,7 @@ public class WebApplicationServer {
             while ((clientSocket = serverSocket.accept()) != null) {
                 logger.info("Client Connected!");
 
+                // Main Thread에서 처리하도록 구현
                 try (InputStream in = clientSocket.getInputStream();
                      OutputStream out = clientSocket.getOutputStream()) {
                     BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -47,8 +48,11 @@ public class WebApplicationServer {
                         int operand2 = Integer.parseInt(requestLine.getQueryStrings().getValue("operand2"));
 
                         int result = Calculator.calculate(operand1, operator, operand2);
+                        byte[] body = String.valueOf(result).getBytes();
 
-                        logger.info("result : {}", result);
+                        HttpResponse httpResponse = new HttpResponse(dataOutputStream);
+                        httpResponse.response200Header("application/json", body.length);
+                        httpResponse.responseBody(body);
                     }
                 }
             }
