@@ -1,0 +1,1 @@
+GET http://localhost:8080/caluate?operand1=1&operator=+&operand2=2

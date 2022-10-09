@@ -1,6 +1,5 @@
 package org.example.was.calculator;
 
-import org.example.calculator.operator.*;
 import org.example.was.calculator.operator.*;
 
 import java.util.List;
