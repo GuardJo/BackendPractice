@@ -1,5 +1,6 @@
 package org.example.was;
 
+import org.example.was.calculator.Calculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,9 +37,18 @@ public class WebApplicationServer {
                     BufferedReader br = new BufferedReader(new InputStreamReader(in));
                     DataOutputStream dataOutputStream = new DataOutputStream(out);
 
-                    String line = "";
-                    while ((line = br.readLine()) != "") {
-                        System.out.println(line);
+                    HttpRequest httpRequest = new HttpRequest(br);
+
+                    if (httpRequest.isGetMethod() && httpRequest.getUrlPath().equals("/calculate")) {
+                        RequestLine requestLine = httpRequest.getRequestLine();
+
+                        int operand1 = Integer.parseInt(requestLine.getQueryStrings().getValue("operand1"));
+                        String operator = requestLine.getQueryStrings().getValue("operator");
+                        int operand2 = Integer.parseInt(requestLine.getQueryStrings().getValue("operand2"));
+
+                        int result = Calculator.calculate(operand1, operator, operand2);
+
+                        logger.info("result : {}", result);
                     }
                 }
             }

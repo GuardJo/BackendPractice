@@ -11,6 +11,10 @@ public class QueryString {
         this.value = value;
     }
 
+    public boolean hasValue(String key) {
+        return this.key.equals(key);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,5 +26,9 @@ public class QueryString {
     @Override
     public int hashCode() {
         return Objects.hash(key, value);
+    }
+
+    public String getValue() {
+        return this.value;
     }
 }

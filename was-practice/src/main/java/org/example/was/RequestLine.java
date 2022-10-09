@@ -25,6 +25,10 @@ public class RequestLine {
         this.queryStrings = new QueryStrings(queryString);
     }
 
+    public String getUrlPath() {
+        return this.urlPath;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,5 +40,13 @@ public class RequestLine {
     @Override
     public int hashCode() {
         return Objects.hash(method, urlPath, queryStrings);
+    }
+
+    public String getMethod() {
+        return this.method;
+    }
+
+    public QueryStrings getQueryStrings() {
+        return this.queryStrings;
     }
 }

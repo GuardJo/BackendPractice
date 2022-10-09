@@ -35,4 +35,12 @@ public class QueryStrings {
     public int hashCode() {
         return Objects.hash(queryStrings);
     }
+
+    public String getValue(String key) {
+        return queryStrings.stream()
+                .filter(queryString -> queryString.hasValue(key))
+                .findFirst()
+                .map(QueryString::getValue)
+                .orElse(null);
+    }
 }
