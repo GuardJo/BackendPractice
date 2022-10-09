@@ -7,16 +7,15 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.Charset;
 
 /**
  * 요구사항
- * GET /caluate?operand1=1&operator=+&operand2=2
+ * GET /calculate?operand1=1&operator=+&operand2=2
  * 위와 같은 형식의 URL 열기
  */
 public class WebApplicationServer {
     private final int port;
-    private static Logger logger = LoggerFactory.getLogger(WebApplicationServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebApplicationServer.class);
 
     public WebApplicationServer(int port) {
         this.port = port;
@@ -29,32 +28,11 @@ public class WebApplicationServer {
             Socket clientSocket;
             logger.info("waiting client...");
 
+            // 사용자 요청이 올 때마다 Thread 생성
             while ((clientSocket = serverSocket.accept()) != null) {
                 logger.info("Client Connected!");
 
-                // Main Thread에서 처리하도록 구현
-                try (InputStream in = clientSocket.getInputStream();
-                     OutputStream out = clientSocket.getOutputStream()) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(in));
-                    DataOutputStream dataOutputStream = new DataOutputStream(out);
-
-                    HttpRequest httpRequest = new HttpRequest(br);
-
-                    if (httpRequest.isGetMethod() && httpRequest.getUrlPath().equals("/calculate")) {
-                        RequestLine requestLine = httpRequest.getRequestLine();
-
-                        int operand1 = Integer.parseInt(requestLine.getQueryStrings().getValue("operand1"));
-                        String operator = requestLine.getQueryStrings().getValue("operator");
-                        int operand2 = Integer.parseInt(requestLine.getQueryStrings().getValue("operand2"));
-
-                        int result = Calculator.calculate(operand1, operator, operand2);
-                        byte[] body = String.valueOf(result).getBytes();
-
-                        HttpResponse httpResponse = new HttpResponse(dataOutputStream);
-                        httpResponse.response200Header("application/json", body.length);
-                        httpResponse.responseBody(body);
-                    }
-                }
+                new Thread(new RequestHandler(clientSocket)).start();
             }
         }
     }
