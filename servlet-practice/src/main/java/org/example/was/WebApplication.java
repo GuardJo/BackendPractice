@@ -1,15 +1,24 @@
 package org.example.was;
 
-import java.io.IOException;
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.startup.Tomcat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
 
 public class WebApplication {
-    public static void main(String[] args) {
-        WebApplicationServer webApplicationServer = new WebApplicationServer(8080);
+    private static final Logger log = LoggerFactory.getLogger(WebApplication.class);
 
-        try {
-            webApplicationServer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws LifecycleException {
+        String webAppDir = "webapp/";
+        Tomcat tomcat = new Tomcat();
+        tomcat.setPort(8080);
+
+        tomcat.addWebapp("/", new File(webAppDir).getAbsolutePath());
+
+        tomcat.start();
+        tomcat.getServer().await();
+
     }
 }
