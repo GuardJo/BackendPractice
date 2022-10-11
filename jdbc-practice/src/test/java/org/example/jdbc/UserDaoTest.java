@@ -7,6 +7,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
+import java.sql.SQLException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserDaoTest {
@@ -19,7 +21,7 @@ public class UserDaoTest {
 
     @DisplayName("UserDao 생성 및 정상 생성 확인 테스트")
     @Test
-    void testCreate() {
+    void testCreate() throws SQLException {
         UserDao userDao = new UserDao();
         User createUser = new User("userId", "password", "name", "email");
 
