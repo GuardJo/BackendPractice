@@ -1,0 +1,2 @@
+// + 기호는 url 인코딩에서 걸림 (" ") 공백으로 변함
+GET http://localhost:8080/calculate?operand1=10&operator=%2b&operand2=20
