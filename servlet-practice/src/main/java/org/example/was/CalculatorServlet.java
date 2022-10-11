@@ -10,21 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/calculate")
-public class CalculatorServlet implements Servlet {
+public class CalculatorServlet extends GenericServlet {
     private static final Logger log = LoggerFactory.getLogger(CalculatorServlet.class);
-    private ServletConfig servletConfig;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        log.info("servlet init");
-
-        this.servletConfig = config;
-    }
-
-    @Override
-    public ServletConfig getServletConfig() {
-        return this.servletConfig;
-    }
 
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
@@ -39,15 +26,5 @@ public class CalculatorServlet implements Servlet {
         PrintWriter printWriter = res.getWriter();
 
         printWriter.println(result);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return null;
-    }
-
-    @Override
-    public void destroy() {
-        log.info("servlet destroy");
     }
 }
