@@ -4,17 +4,22 @@ import org.example.was.calculator.Calculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.*;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/calculate")
-public class CalculatorServlet extends GenericServlet {
+public class CalculatorServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(CalculatorServlet.class);
 
     @Override
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("servlet service");
 
         int operand1 = Integer.parseInt(req.getParameter("operand1"));
@@ -23,7 +28,7 @@ public class CalculatorServlet extends GenericServlet {
 
         int result = Calculator.calculate(operand1, operator, operand2);
 
-        PrintWriter printWriter = res.getWriter();
+        PrintWriter printWriter = resp.getWriter();
 
         printWriter.println(result);
     }
