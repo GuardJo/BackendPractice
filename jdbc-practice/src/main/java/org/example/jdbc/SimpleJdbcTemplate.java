@@ -26,7 +26,7 @@ public class SimpleJdbcTemplate {
         }
     }
 
-    public User executeQuery(String userId, String sql, SimplePreparedStatementSetter simplePreparedStatementSetter, SimpleRowMapper simpleRowMapper) throws SQLException {
+    public User executeQuery(String sql, SimplePreparedStatementSetter simplePreparedStatementSetter, SimpleRowMapper simpleRowMapper) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
