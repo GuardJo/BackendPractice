@@ -20,7 +20,7 @@ public class ConnectionHandler {
         dataSource = hikariDataSource;
     }
 
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
