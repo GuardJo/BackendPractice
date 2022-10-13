@@ -15,7 +15,8 @@ public class ConnectionHandler {
         hikariDataSource.setJdbcUrl(DBConnectionConstant.DB_URL);
         hikariDataSource.setUsername(DBConnectionConstant.DB_USER_NAME);
         hikariDataSource.setPassword(DBConnectionConstant.DB_PASSWORD);
-        
+        hikariDataSource.setMaximumPoolSize(DBConnectionConstant.DB_MAXIMUM_POOL_SIZE);
+
         dataSource = hikariDataSource;
     }
 
