@@ -4,13 +4,14 @@ import org.example.mvc.annotation.Controller;
 import org.example.mvc.annotation.RequestMapping;
 import org.example.mvc.annotation.RequestMethod;
 
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@Controller
-public class TestController {
+@Controller(contextPath = "/test")
+public class TestController implements RootController{
+    @Override
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String test(HttpRequest request, HttpResponse response) {
-        return "test";
+    public String handleMapping(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        return "test.html";
     }
 }
