@@ -1,6 +1,7 @@
 package org.example.mvc;
 
 import org.example.mvc.annotation.Controller;
+import org.example.mvc.model.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
@@ -23,6 +24,24 @@ public class ReflectionTest {
         });
 
         assertThat(2).isEqualTo(controllers.size());
+    }
+
+    @DisplayName("Heap 영역에서 클래스 객체를 가져오는 세 가지 방법")
+    @Test
+    void testLoad() throws ClassNotFoundException {
+        // 첫번째 방법
+        Class<User> user1 = User.class;
+
+        // 두번째 방법
+        User user = new User("id", "name");
+        Class<User> user2 = (Class<User>) user.getClass();
+
+        // 세번째 방법
+        Class<User> user3 = (Class<User>) Class.forName("org.example.mvc.model.User");
+
+        assertThat(user1).isEqualTo(user2);
+        assertThat(user2).isEqualTo(user3);
+        assertThat(user3).isEqualTo(user1);
     }
 
     private Set<Class<?>> scanController(List<Class<? extends Annotation>> annotaionts) {
