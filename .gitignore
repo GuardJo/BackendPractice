@@ -1,2 +1,4 @@
 ﻿*.class
 jdbc-practice/out/*
+mvc-practice/.idea/*
+mvc-practice/.gradle/*
