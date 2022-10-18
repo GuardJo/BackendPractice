@@ -12,6 +12,6 @@ public class TestController implements RootController{
     @Override
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String handleMapping(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        return "test.html";
+        return "/test.jsp";
     }
 }

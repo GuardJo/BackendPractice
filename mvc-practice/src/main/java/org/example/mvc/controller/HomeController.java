@@ -12,6 +12,6 @@ public class HomeController implements RootController {
     @Override
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String handleMapping(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        return "index.html";
+        return "/home.jsp";
     }
 }

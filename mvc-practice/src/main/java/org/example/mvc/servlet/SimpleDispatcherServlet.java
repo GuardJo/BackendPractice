@@ -6,6 +6,7 @@ import org.example.mvc.controller.RootController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +44,9 @@ public class SimpleDispatcherServlet extends HttpServlet {
             String path= (String) method.invoke(rootController, req, resp);
 
             log.info("path : {}", path);
+
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
+            requestDispatcher.forward(req, resp);
 
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             log.error("Reflections Error, {}", e.getMessage(), e);
