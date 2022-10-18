@@ -11,4 +11,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Controller {
     String contextPath() default "/";
+    RequestMethod method() default RequestMethod.GET;
 }

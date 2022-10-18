@@ -1,12 +1,11 @@
 package org.example.mvc.servlet;
 
-import org.example.mvc.controller.HomeController;
+import org.example.mvc.HandlerKey;
+import org.example.mvc.annotation.RequestMethod;
 import org.example.mvc.controller.RootController;
-import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,11 +19,11 @@ import java.lang.reflect.Method;
 @WebServlet("/")
 public class SimpleDispatcherServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(SimpleDispatcherServlet.class);
-    private RequestMappingHandler requestMappingHandler;
+    private SimpleHandlerMapping requestMappingHandler;
 
     @Override
     public void init() throws ServletException {
-        this.requestMappingHandler = new RequestMappingHandler();
+        this.requestMappingHandler = new SimpleHandlerMapping();
         requestMappingHandler.init();
     }
 
@@ -32,7 +31,8 @@ public class SimpleDispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("[Test] DispatcherServlet service started.");
 
-        Class<?> controller = requestMappingHandler.findController(req.getServletPath());
+        Class<?> controller = requestMappingHandler.findController(new HandlerKey(req.getServletPath(),
+                Enum.valueOf(RequestMethod.class, req.getMethod())));
 
         log.info("find {}", controller.getName());
 
