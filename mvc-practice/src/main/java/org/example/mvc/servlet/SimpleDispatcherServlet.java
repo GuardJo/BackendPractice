@@ -3,6 +3,8 @@ package org.example.mvc.servlet;
 import org.example.mvc.HandlerKey;
 import org.example.mvc.annotation.RequestMethod;
 import org.example.mvc.controller.RootController;
+import org.example.mvc.view.SimpleViewResolver;
+import org.example.mvc.view.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,10 +47,10 @@ public class SimpleDispatcherServlet extends HttpServlet {
 
             log.info("path : {}", path);
 
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
-            requestDispatcher.forward(req, resp);
+            View view = SimpleViewResolver.resolveview(path);
+            view.render(req, resp);
 
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+        } catch (Exception e) {
             log.error("Reflections Error, {}", e.getMessage(), e);
         }
     }

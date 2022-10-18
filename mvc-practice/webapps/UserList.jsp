@@ -12,9 +12,14 @@
   <thead>
   User List
   </thead>
-  <tr>
-    <td></td>
-  </tr>
+    <c:forEach items="${userList}" var="user" varStatus="status">
+        <tr>
+            <th scope="row">${status.count}</th>
+            <td>${user.userId}</td>
+            <td>${user.userName}</td>
+            </td>
+        </tr>
+    </c:forEach>
 </table>
 </body>
 </html>
