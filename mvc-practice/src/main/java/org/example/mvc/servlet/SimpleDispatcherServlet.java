@@ -8,7 +8,6 @@ import org.example.mvc.view.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @WebServlet("/")
@@ -37,13 +35,17 @@ public class SimpleDispatcherServlet extends HttpServlet {
         Class<?> controller = requestMappingHandler.findController(new HandlerKey(req.getServletPath(),
                 Enum.valueOf(RequestMethod.class, req.getMethod())));
 
+        if (controller == null) {
+            return;
+        }
+
         log.info("find {}", controller.getName());
 
         try {
-            Constructor constructor = controller.getConstructor();
+            Constructor<?> constructor = controller.getConstructor();
             RootController rootController = (RootController) constructor.newInstance();
             Method method = controller.getMethod("handleMapping", HttpServletRequest.class, HttpServletResponse.class);
-            String path= (String) method.invoke(rootController, req, resp);
+            String path = (String) method.invoke(rootController, req, resp);
 
             log.info("path : {}", path);
 
