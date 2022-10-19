@@ -6,6 +6,7 @@ import java.io.IOException;
 
 @WebFilter("/*")
 public class CharacterEncodingFilter implements Filter {
+    private final String DEFAULT_ENCODIG = "UTF-8";
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // Not Used
@@ -13,8 +14,8 @@ public class CharacterEncodingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding(DEFAULT_ENCODIG);
+        response.setCharacterEncoding(DEFAULT_ENCODIG);
 
         chain.doFilter(request, response);
     }
