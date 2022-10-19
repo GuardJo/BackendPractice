@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class HomeController implements RootController {
-    @Override
+public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String handleMapping(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         return "/home.jsp";
