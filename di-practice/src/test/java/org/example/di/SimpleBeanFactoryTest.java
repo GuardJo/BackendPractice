@@ -3,14 +3,12 @@ package org.example.di;
 import org.example.annotation.Controller;
 import org.example.annotation.Service;
 import org.example.controller.UserController;
-import org.example.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
