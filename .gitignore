@@ -2,3 +2,5 @@
 jdbc-practice/out/*
 mvc-practice/.idea/*
 mvc-practice/.gradle/*
+di-practice/.idea/*
+di-practice/.gradle/*
